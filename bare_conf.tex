@@ -67,6 +67,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage[babel,german=quotes]{csquotes} % Für gute Anführungszeichen
+\usepackage{float}
 
 \usepackage{caption}
 \captionsetup{font=footnotesize,justification=centering,labelsep=period}
@@ -117,7 +118,7 @@
 % *** GRAPHICS RELATED PACKAGES ***
 %
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
+  \usepackage[pdftex]{graphicx}
   % declare the path(s) where your graphic files are
   % \graphicspath{{../pdf/}{../jpeg/}}
   % and their extensions so you won't have to specify these with
@@ -349,6 +350,25 @@ Email: {\tt lennart.karsten@haw-hamburg.de}}\\
 \section{Einleitung}
 
 
+\section{Mars Gruppe}
+%Multi-Agent Research & Simulation
+%Arbeitsgruppe von Prof. Dr. Thiel-Clemen
+%Entwicklung von skalierbaren Multi-Agenten Simulationen
+
+%Massive Nutzung von Multi-Agenten Systemen 
+%sehr große spatiale Räume
+%lange Simulationslaufzeiten
+%
+%Big Data mit Raum- und Zeitbezug
+
+%- Ground
+%- Rock
+%- Shuttle
+%- Life
+%- Deimos
+%- Phobos
+
+
 \section{Georeferenzierung}
 %- Probleme zwischen GIS und Geoserver
 %-- Geoserver speichert Daten hirachisch
@@ -363,47 +383,72 @@ Email: {\tt lennart.karsten@haw-hamburg.de}}\\
 %- Bilder
 
 
-\section{Tools}
-%- https://www.movebank.org/
-%- geospatial
+\section{GIS}
+%Erfassung
+%Bearbeitung
+%Organisation
+%Analyse
+%Präsentation 
+%von Geo-Daten beschäftigen
+
+\subsection{Rasterdaten Typen}
+3 Arten
+
+\subsubsection{Thematische (diskrete) Daten (Discrete data)}
+Repräsentieren die Landnutzung oder Bodendaten.
+
+\begin{figure}[htbp]
+\centering%
+\fbox{\texttt{Insert figure stuff here.}}
+\caption{My figure.}\label{myfigone}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  	%\includegraphics[width=\columnwidth]{img/gis_raster}
+  	\includegraphics[height=114pt]{img/gis_raster}
+  	%\includegraphics[height=1/6\textheight]{img/gis_raster}
+  \caption{Kommunikationen von Führungspersonen auf Basis von Nachrichten aus dem Jahre 2006.\cite{challanges_in_osint}}
+  \label{img:Beziehungen}
+\end{figure}
 
 
-\section{Rasterdaten Typen}
-%1. Thematische (diskrete) Daten (Discrete data) repräsentieren die Landnutzung
-%oder Bodendaten.
-%2. Kontinuierliche Daten (Continuous data) stellen Ereignisse wie Temperatur und
-%Höhenmeter sowie spektrale Daten wie Satellitenbilder und Luftaufnahmen dar.
-%3. Bilder (Picture data), die gescannte Karten oder Zeichnungen zeigen, sowie
-%Gebäudeaufnahmen
+\the\textheight\\
+
+\the\columnwidth
+
+\subsubsection{Kontinuierliche Daten (Continuous data)}
+Stellen Ereignisse wie Temperatur und Höhenmeter sowie spektrale Daten wie Satellitenbilder und Luftaufnahmen dar.
+
+\subsubsection{Bilder (Picture data)}
+Die gescannte Karten oder Zeichnungen zeigen, sowie Gebäudeaufnahmen
 
 
-\section{GIS Rastertypen}
+\subsection{GIS Rastertypen}
 %- Raster als Grundkarten
 %- Raster als Oberflächenkarten
 %- Raster als thematische Karte
 %- Raster als Beschreibung eines Objekts
 
 
-\section{GIS Vektordaten}
+\subsection{GIS Vektordaten}
 %- Punkte
 %- Linien
 %- Polygone
 
 
-\section{Mars Gruppe}
-%- Ground
-%- Rock
-%- Shuttle
-%- Life
-%- Deimos
-%- Phobos
+%\section{Tools}
+%- https://www.movebank.org/
+%- geospatial
 
 
-\section{client Server Modell erklären}
-%
+\section{DEIMOS}
+%Was ist Deimos etc.
+
+\subsection{client Server Modell erklären}
 
 
-\section{Verschneiden von Daten}
+\subsection{Verschneiden von Daten}
 %- Raster
 %- Vektor
 %-- Punkt-In-Polygon
@@ -414,7 +459,6 @@ Email: {\tt lennart.karsten@haw-hamburg.de}}\\
 
 \section{Zusammenfassung}
 bla\cite{mariusz}
-
 
 
 \bibliographystyle{IEEEtran}
