@@ -298,7 +298,7 @@
 
 % *** PDF, URL AND HYPERLINK PACKAGES ***
 %
-%\usepackage{url}
+\usepackage{url}
 % url.sty was written by Donald Arseneau. It provides better support for
 % handling and breaking URLs. url.sty is already installed on most LaTeX
 % systems. The latest version can be obtained at:
@@ -348,25 +348,124 @@ Email: {\tt lennart.karsten@haw-hamburg.de}}\\
 
 
 \section{Einleitung}
+In den vergangenen Jahren haben digitale Karten, analoge Karten nahezu vom Markt verdrängt. Google Maps, Open Streetview und andere Projekte bieten mittlerweile eine fast vollständige Übersicht über unsere Erde. Das Auffinden von Orten oder die Routenplanung sind gelöste Probleme der Wissenschaft.\\
+Auf Grund der hohen Qualität, Auflösung und Flexibilität haben sich u.a. neue Bereiche für Geologen und Biologen erschlossen. Deren Anwendungsfälle variieren jedoch stark von der üblichen Nutzung.\\
+Im Vergleich zu anderen Anwendern spielt die Zeit eine entschiedene Rolle. Ein Beispiel ist, das Messen von Temperaturwerten an bestimmten Orten über einen langen Zeitraum. Ein anderes Anwendungsgebiet ist die Erforschung von Tierarten und deren geografische Bewegung.\\
+Für die visuelle Darstellung solcher Zeit bezogenen spatialen Daten, bedarf es Anwendungen, die eine effiziente Nutzung durch technisch nicht versierte Personen ermöglicht.
 
-
-\section{Mars Gruppe}
-%Multi-Agent Research & Simulation
-%Arbeitsgruppe von Prof. Dr. Thiel-Clemen
-%Entwicklung von skalierbaren Multi-Agenten Simulationen
-
+\section{MARS Gruppe}
 %Massive Nutzung von Multi-Agenten Systemen 
 %sehr große spatiale Räume
 %lange Simulationslaufzeiten
-%
 %Big Data mit Raum- und Zeitbezug
+Mars ist das Akronym für Multi-Agent Research \& Simulation, die Arbeitsgruppe von Prof. Dr. Thiel-Clemen. Die Arbeitsgruppe befasst sich mit mit der Erstellung von Multi-Agenten Systemen (MAS).\\
+Zentrales Element der Arbeitsgruppe ist das MARS Framework. Dieses besteht aus den Komponenten Modellierung, Websuite, Life, sowie der Qualitätskontrolle und dem Versionsmanagement.\\
+Für diese Arbeit ist lediglich die Websuite von Bedeutung. Diese ist in der Entstehung und besteht aus folgenden Komponenten (siehe Abbildung \ref{img:mars_websuite}).
 
-%- Ground
-%- Rock
-%- Shuttle
-%- Life
-%- Deimos
-%- Phobos
+\begin{figure}[H]
+  \centering
+  	\includegraphics[height=114pt]{img/mars_websuite}\\
+  \caption[]{Die Websuite des Mars Frameworks}
+  \label{img:mars_websuite}
+\end{figure}
+
+\subsection{MARS PHOBOS}
+PHOBOS ist für den Import von Daten in das MARS Framework zuständig. Es importiert Daten der Anwender und Modellierer.\\
+PHOBOS konvertiert zu importierende Daten und speichert sie in GROUND und ROCK.
+
+\subsection{MARS GROUND}
+GROUND nutzt den Geoserver\footnote{\url{http://geoserver.org/}} zur Speicherung von Daten im Geoinformationssystem (GIS). 
+
+\subsection{MARS ROCK}
+Die ROCK Komponente ist für die Verwaltung aller Daten zuständig, die nicht mit dem Geoserver kompatibel sind. Hierzu zählen nicht-spatiale Daten und GIS Formate, die nicht mit dem Geoserver kompatibel sind. Der Großteil der Daten im ROCK sind zeitlich veränderliche Daten, wie beispielsweise Bevölkerungszahlen.
+
+\subsection{MARS DEIMOS}
+DEIMOS arbeitet auf Basis der Daten, die durch PHOBOS importiert werden. Es stellt eine Webanwendung bereit, die es dem Benutzer erlaubt die Datenbestände in GROUND und ROCK zu sichten. Hierbei liegt der Fokus auf der Visualisierung unterschiedlicher Datentypen.\\
+Dem Benutzer soll es möglich sein Daten für eine Simulation auszuwählen. Diese werden in einer JSON Datei benannt und die Datei wird an SHUTTLE übergeben.
+
+\subsection{MARS SHUTTLE}
+Das SHUTTLE ließt die \enquote{Data Descriptor} Datei und lädt die entsprechenden Daten aus GROUND und ROCK. anschließend erstellt es eine \enquote{Scenario Configuration} Datei und sendet diese an das MARS LIFE.\\
+MARS LIFE beinhaltet die Simulationen.
+
+
+\section{Geoinformationssystem (GIS)}
+Geoinformationssysteme sind für die Erfassung, Bearbeitung, Organisation, Analyse und Präsentation von Geo-Daten zuständig.\\
+Im folgenden Abschnitt werden zwei Arten Rasterdaten zu klassifizieren beschrieben. Diese sind, die allgemeinen Rastertypen von GIS, sowie die speziellen der gängigsten GIS Anwendung, ArcGIS\footnote{\url{https://www.arcgis.com/}}.
+
+\subsection{Rasterdaten Typen}
+Im allgemeinen werden in GIS die folgenden Typen von Rasterdaten unterschieden.
+
+\subsubsection{Thematische Daten (Discrete data)}\hspace*{\fill} \\
+Stellen die Bodendaten oder Landnutzung dar.
+
+\subsubsection{Daten (Continuous data)}\hspace*{\fill} \\
+Repräsentieren Ereignisse wie Bevölkerungszahlen oder Temperaturdaten, sowie spektrale Daten wie Luftaufnahmen oder Satellitenbilder.
+
+\subsubsection{Bilder (Picture data)}\hspace*{\fill} \\
+Sind eingescannte Zeichnungen oder Karten, sowie Gebäudeaufnahmen.
+
+
+\subsection{ArcGIS Rastertypen}
+In der GIS Anwendung ArcGIS gibt es die folgenden vier Typen für Rasterdaten.\\
+
+\subsubsection{Raster als Grundkarten}\hspace*{\fill} \\
+Beim Raster als Grundkarte stellt ein oder mehrere gerasterte Bilder die Grundkarte dar. Darauf basierend können Informationen angezeigt werde. Diese Art von Karte ist in allen freien Kartendiensten, wie OpenStreetMap oder Google Maps verfügbar.
+\begin{figure}[H]
+  \centering
+  	\includegraphics[height=114pt]{img/gis_Flensburg_raster}\\
+  \caption[]{Luftaufnahme von Flensburg aus Google Maps}
+  \label{img:gis_Flensburg_raster}
+\end{figure}
+
+\subsubsection{Raster als Oberflächenkarten}\hspace*{\fill} \\
+Im Gegensatz zu dem Raster als Grundkarte liegt bei Oberflächenkarten die Fokussierung nicht auf infrastrukturellen Merkmalen. Vielmehr werden spatiale Daten durch bestimmte Farbgebung dargestellt. Häufige Anwendung sind Höhenkarten.
+\begin{figure}[H]
+  \centering
+  	\includegraphics[height=114pt]{img/gis_alps}\\
+  \caption[]{Höhenkarte der Alpen aus OpenStreetMap}
+  \label{img:gis_alps}
+\end{figure}
+
+\subsubsection{Raster als thematische Karte}\hspace*{\fill} \\
+Thematische Karten reduzieren die Anzahl der sichtbaren Merkmale auf ein Minimum. Somit bleiben lediglich die Form der Landfläche und entscheidende Merkmale, die für die Wiedererkennung notwendig sind übrig.\\
+Die angezeigten Daten sind häufig stark schematisiert. Sie können Ergebnisse von GIS Operationen sein. Ein mögliches Anwendungsgebiet ist die Darstellung von Landnutzung. 
+\begin{figure}[H]
+  \centering
+  	\includegraphics[height=114pt]{img/gis_thematisch}\\
+  \caption[]{Thematische Darstellung des Krueger Nationalparks\footnotemark}
+  \label{img:gis_thematisch}
+\end{figure}
+\footnotetext{\url{http://www.krugerpark.co.za/}}
+
+\subsubsection{Raster als Beschreibung eines Objekts}\hspace*{\fill} \\
+Hierbei werden Rasterbilder genutzt um ein Bereich einer Karte näher zu beschreiben. Dies wird z.B. verwendet, um Karten- oder Luftbilder an interessanten Stellen weiter anzureichern. 
+
+\begin{figure}[H]
+  \centering
+  	\includegraphics[height=114pt]{img/gis_beschreibung_object}\\
+  \caption[]{Karte Flensburgs mit georeferenzierten Bildern aus Panoramio\footnotemark}
+  \label{img:gis_beschreibung_object}
+\end{figure}
+\footnotetext{\url{http://www.panoramio.com/}}
+
+\subsection{GIS Vektordaten}
+
+\subsubsection{Punkte}\hspace*{\fill} \\
+
+\subsubsection{Linien}\hspace*{\fill} \\
+
+\subsubsection{Polygone}\hspace*{\fill} \\
+
+
+
+%\section{Datawarehouse (DWH)}
+
+%\begin{figure}[H]
+%  \centering
+%  	\includegraphics[width=\columnwidth]{img/border}\\
+%  \caption[]{Ukraine Krimm Grenze}
+%  \label{img:border}
+%\end{figure}
 
 
 \section{Georeferenzierung}
@@ -378,75 +477,35 @@ Email: {\tt lennart.karsten@haw-hamburg.de}}\\
 %-- Finkel, R. A. ; Bentley, J. L. (1974): Quad trees a data structure for retrieval on composite keys. In: Acta
 %Informatica 4, Volume 1, pp. 1 – 9. – URL http://link.springer.com/article/10.1007%2FBF00288933.
 
+%\begin{figure}[H]
+%  \centering
+%  	\includegraphics[height=114pt]{img/gis_quads}\\
+%  \caption[]{Darstellung von GIS als Quads}
+%  \label{img:gis_quads}
+%\end{figure}
 
-\section{Datawarehouse (DWH)?}
-%- Bilder
+\subsection{Zeitbezogene Daten}
+%\begin{figure}[H]
+%  \centering
+%  	\includegraphics[height=114pt]{img/australia_layers}\\
+%  \caption[]{10 Jahre Australien}
+%  \label{img:australia_layers}
+%\end{figure}
 
-
-\section{GIS}
-%Erfassung
-%Bearbeitung
-%Organisation
-%Analyse
-%Präsentation 
-%von Geo-Daten beschäftigen
-
-\subsection{Rasterdaten Typen}
-3 Arten
-
-\subsubsection{Thematische (diskrete) Daten (Discrete data)}
-Repräsentieren die Landnutzung oder Bodendaten.
-
-\begin{figure}[htbp]
-\centering%
-\fbox{\texttt{Insert figure stuff here.}}
-\caption{My figure.}\label{myfigone}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  	%\includegraphics[width=\columnwidth]{img/gis_raster}
-  	\includegraphics[height=114pt]{img/gis_raster}
-  	%\includegraphics[height=1/6\textheight]{img/gis_raster}
-  \caption{Kommunikationen von Führungspersonen auf Basis von Nachrichten aus dem Jahre 2006.\cite{challanges_in_osint}}
-  \label{img:Beziehungen}
-\end{figure}
-
-
-\the\textheight\\
-
-\the\columnwidth
-
-\subsubsection{Kontinuierliche Daten (Continuous data)}
-Stellen Ereignisse wie Temperatur und Höhenmeter sowie spektrale Daten wie Satellitenbilder und Luftaufnahmen dar.
-
-\subsubsection{Bilder (Picture data)}
-Die gescannte Karten oder Zeichnungen zeigen, sowie Gebäudeaufnahmen
-
-
-\subsection{GIS Rastertypen}
-%- Raster als Grundkarten
-%- Raster als Oberflächenkarten
-%- Raster als thematische Karte
-%- Raster als Beschreibung eines Objekts
-
-
-\subsection{GIS Vektordaten}
-%- Punkte
-%- Linien
-%- Polygone
-
-
-%\section{Tools}
-%- https://www.movebank.org/
-%- geospatial
+\subsection{Orts bezogene Daten}
+%\begin{figure}[H]
+%  \centering
+%  	\includegraphics[height=114pt]{img/movebank}\\
+%  \caption[]{Movebank Vogelbewegung}
+%  \label{img:movebank}
+%\end{figure}
 
 
 \section{DEIMOS}
 %Was ist Deimos etc.
 
 \subsection{client Server Modell erklären}
-
+%
 
 \subsection{Verschneiden von Daten}
 %- Raster
@@ -456,14 +515,18 @@ Die gescannte Karten oder Zeichnungen zeigen, sowie Gebäudeaufnahmen
 %-- Polygon-In-Polygon
 
 
-
 \section{Zusammenfassung}
 bla\cite{mariusz}
+
+
+%\section{Tools}
+%- https://www.movebank.org/
+%- geospatial
 
 
 \bibliographystyle{IEEEtran}
 \bibliography{bibtemplate_samples}
 
 
-% that's all folks
+
 \end{document}
