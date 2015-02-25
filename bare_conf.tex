@@ -348,10 +348,10 @@ Email: {\tt lennart.karsten@haw-hamburg.de}}\\
 
 
 \section{Einleitung}
-In den vergangenen Jahren haben digitale Karten, analoge Karten nahezu vom Markt verdrängt. Google Maps, Open Streetview und andere Projekte bieten mittlerweile eine fast vollständige Übersicht über unsere Erde. Das Auffinden von Orten oder die Routenplanung sind gelöste Probleme der Wissenschaft.\\
-Auf Grund der hohen Qualität, Auflösung und Flexibilität haben sich u.a. neue Bereiche für Geologen und Biologen erschlossen. Deren Anwendungsfälle variieren jedoch stark von der üblichen Nutzung.\\
-Im Vergleich zu anderen Anwendern spielt die Zeit eine entschiedene Rolle. Ein Beispiel ist, das Messen von Temperaturwerten an bestimmten Orten über einen langen Zeitraum. Ein anderes Anwendungsgebiet ist die Erforschung von Tierarten und deren geografische Bewegung.\\
-Für die visuelle Darstellung solcher Zeit bezogenen spatialen Daten, bedarf es Anwendungen, die eine effiziente Nutzung durch technisch nicht versierte Personen ermöglicht.
+In den vergangenen Jahren haben digitale Karten, analoge Karten nahezu vom Markt verdrängt. Google Maps, Open Streetview und andere Projekte bieten mittlerweile eine fast vollständige Übersicht de Erde. Das Auffinden von Orten oder die Routenplanung sind gelöste Probleme der Wissenschaft.\\
+Auf Grund der hohen Qualität, Auflösung und Flexibilität haben sich u.a. neue Bereiche für Geologen und Biologen erschlossen.\\
+Deren Anwendungsfälle variieren jedoch stark von der üblichen Nutzung. Der Größte Unterschied ist die Relevanz von Zeit. Ein Beispiel ist, das Messen von Temperaturwerten an bestimmten Orten über einen langen Zeitraum. Ein anderes Anwendungsgebiet ist die Erforschung von Tierarten und deren geografische Bewegung.\\
+Für die visuelle Darstellung solcher zeitbezogenen spatialen Daten, bedarf es Anwendungen, die eine effiziente Nutzung durch technisch nicht versierte Personen ermöglicht.
 
 \section{MARS Gruppe}
 %Massive Nutzung von Multi-Agenten Systemen 
@@ -370,43 +370,39 @@ Für diese Arbeit ist lediglich die Websuite von Bedeutung. Diese ist in der Ent
 \end{figure}
 
 \subsection{MARS PHOBOS}
-PHOBOS ist für den Import von Daten in das MARS Framework zuständig. Es importiert Daten der Anwender und Modellierer.\\
-PHOBOS konvertiert zu importierende Daten und speichert sie in GROUND und ROCK.
+PHOBOS ist für den Import von Daten in das MARS Framework zuständig. Es importiert Daten der Anwender und Modellierer. Zudem konvertiert es zu importierende Daten und speichert diese in GROUND und ROCK.
 
 \subsection{MARS GROUND}
-GROUND nutzt den Geoserver\footnote{\url{http://geoserver.org/}} zur Speicherung von Daten im Geoinformationssystem (GIS). 
+GROUND nutzt den Geoserver\footnote{\url{http://geoserver.org/}} zur Speicherung von Daten im Geoinformationssystem (GIS). Es verfügt über eine API, die im begrenzten Rahmen Konvertierungsarbeiten übernehmen kann.
 
 \subsection{MARS ROCK}
 Die ROCK Komponente ist für die Verwaltung aller Daten zuständig, die nicht mit dem Geoserver kompatibel sind. Hierzu zählen nicht-spatiale Daten und GIS Formate, die nicht mit dem Geoserver kompatibel sind. Der Großteil der Daten im ROCK sind zeitlich veränderliche Daten, wie beispielsweise Bevölkerungszahlen.
 
 \subsection{MARS DEIMOS}
 DEIMOS arbeitet auf Basis der Daten, die durch PHOBOS importiert werden. Es stellt eine Webanwendung bereit, die es dem Benutzer erlaubt die Datenbestände in GROUND und ROCK zu sichten. Hierbei liegt der Fokus auf der Visualisierung unterschiedlicher Datentypen.\\
-Dem Benutzer soll es möglich sein Daten für eine Simulation auszuwählen. Diese werden in einer JSON Datei benannt und die Datei wird an SHUTTLE übergeben.
+Dem Benutzer soll es möglich sein, Daten für eine Simulation auszuwählen. Diese werden in einer JSON Datei benannt und die Datei wird an SHUTTLE übergeben.
 
 \subsection{MARS SHUTTLE}
-Das SHUTTLE ließt die \enquote{Data Descriptor} Datei und lädt die entsprechenden Daten aus GROUND und ROCK. anschließend erstellt es eine \enquote{Scenario Configuration} Datei und sendet diese an das MARS LIFE.\\
+Das SHUTTLE ließt die \enquote{Data Descriptor} Datei, kommend von DEIMOS aus und lädt die entsprechenden Daten aus GROUND und ROCK. anschließend erstellt es eine \enquote{Scenario Configuration} Datei und sendet diese an das MARS LIFE.\\
 MARS LIFE beinhaltet die Simulationen.
 
 
 \section{Geoinformationssystem (GIS)}
-Geoinformationssysteme sind für die Erfassung, Bearbeitung, Organisation, Analyse und Präsentation von Geo-Daten zuständig.\\
-Im folgenden Abschnitt werden zwei Arten Rasterdaten zu klassifizieren beschrieben. Diese sind, die allgemeinen Rastertypen von GIS, sowie die speziellen der gängigsten GIS Anwendung, ArcGIS\footnote{\url{https://www.arcgis.com/}}.
+Geoinformationssysteme sind für die Erfassung, Bearbeitung, Organisation, Analyse und Präsentation von Geo-Daten zuständig. In der MARS Gruppe, welcher der Autor dieser Arbeit angehört Wird die Verwaltung des GIS durch MARS GROUND realisiert.\\
+Im folgenden Abschnitt werden zwei Arten Rasterdaten zu klassifizieren beschrieben. Diese sind, die allgemeinen Rastertypen von GIS, sowie die speziellen der gängigsten GIS Anwendung, ArcGIS\footnote{\url{https://www.arcgis.com/}} unterteilt.
 
 \subsection{Rasterdaten Typen}
-Im allgemeinen werden in GIS die folgenden Typen von Rasterdaten unterschieden.
+Rasterdaten bestehen aus Ansammlungen von Bildpunkten (sog. Pixeln). Jeder Pixel hat einen Farbwert und eine Helligkeit. Aus diesen Pixeln setzen sich Bilder zusammen.\\
+Bilder hoch zu skalieren ist somit mit Qualitätsverlust verbunden. Pixelbilder machen den Großteil aller digitalen Grafiken und Bilder aus. Im allgemeinen werden in GIS die folgenden Typen von Rasterdaten unterschieden\cite{mariuszMaster}.
 
-\subsubsection{Thematische Daten (Discrete data)}\hspace*{\fill} \\
-Stellen die Bodendaten oder Landnutzung dar.
-
-\subsubsection{Daten (Continuous data)}\hspace*{\fill} \\
-Repräsentieren Ereignisse wie Bevölkerungszahlen oder Temperaturdaten, sowie spektrale Daten wie Luftaufnahmen oder Satellitenbilder.
-
-\subsubsection{Bilder (Picture data)}\hspace*{\fill} \\
-Sind eingescannte Zeichnungen oder Karten, sowie Gebäudeaufnahmen.
-
+\begin{itemize}
+  \item Thematische Daten (Discrete data) stellen die Bodendaten oder Landnutzung dar.
+  \item Kontinuierliche Daten (Continuous data) repräsentieren Ereignisse wie Bevölkerungszahlen oder Temperaturdaten, sowie spektrale Daten wie Luftaufnahmen oder Satellitenbilder.
+  \item Bilder (Picture data) sind eingescannte Zeichnungen oder Karten, sowie Gebäudeaufnahmen.\\
+\end{itemize}
 
 \subsection{ArcGIS Rastertypen}
-In der GIS Anwendung ArcGIS gibt es die folgenden vier Typen für Rasterdaten.\\
+ArcGIS ist eine Anwendung zur Erstellung, Betrachtung und Bearbeitung von GIS Daten. Sie zählt zu den besten Anwendungen, die es in diesem Bereich auf dem Markt gibt. In der GIS Anwendung ArcGIS gibt es die folgenden vier Typen für Rasterdaten.\\
 
 \subsubsection{Raster als Grundkarten}\hspace*{\fill} \\
 Beim Raster als Grundkarte stellt ein oder mehrere gerasterte Bilder die Grundkarte dar. Darauf basierend können Informationen angezeigt werde. Diese Art von Karte ist in allen freien Kartendiensten, wie OpenStreetMap oder Google Maps verfügbar.
@@ -449,40 +445,45 @@ Hierbei werden Rasterbilder genutzt um ein Bereich einer Karte näher zu beschre
 \footnotetext{\url{http://www.panoramio.com/}}
 
 \subsection{GIS Vektordaten}
+Vektorgrafiken basieren im Gegensatz zu Rasterbildern auf mathematischen Formen. Hierzu zählen Kreise, Rechtecke und allgemeine Kurven. Vektorgrafiken eignen sich besonders für Schematische Darstellung und sind für Fotografien ungeeignet. Sie sind auf Grund ihrer Beschaffenheit beliebig skalierbar.\\
+GIS Vektordaten bestehen aus Punkten, Linien und Polygonen.
 
 \subsubsection{Punkte}\hspace*{\fill} \\
+Punkte sind das Grundelement, auf ihnen bauen die anderen Formen auf. Ein Punkt besteht aus einer X und einer Y Koordinate. Elemente, die als Punkt dargestellt werden sind z.B. Geopositionen.
 
 \subsubsection{Linien}\hspace*{\fill} \\
+Linien werden durch eine mathematische Funktion dargestellt um die Form exakt zu beschreiben. Technisch wird eine Linie als zwei Punkte mit einer Verbindung umgesetzt.
 
 \subsubsection{Polygone}\hspace*{\fill} \\
+Ein Polygon ist eine geschlossene Form bestehend aus Linien und Punkten. Es kann Eigenschaften, wie den Flächeninhalt besitzen. Beispiele für Polygone sind Rechtecke, Kreise und Dreiecke.
 
 
+\section{Datawarehouse (DWH)}
+Ein Data-Warehouse (DWH) ist eine Datenbankgestützte Anwendung, die Informationen zur Datenanalyse speichert. Dieser Ansatz findet zunehmend Verwendung für die Speicherung von Geo bezogenen Daten (siehe \cite{Kelling2009} \cite{McGuire2008}).\\
+In der Arbeit von Thiel-Clemen\cite{ThielClemen2013} aus dem Jahre 2013, wird beschrieben, wie sich zeitbezogene, spatiale Daten in einer relationalen Datenbank speichern lassen.\\
+Hierzu wird für jede zu speichernde Dimension eine Datentabelle angelegt. Diese hängen von dem Domain spezifischen Use-Case ab. In Abbildung \ref{img:star_schema} wird die Bewegung von Geparden gemessen, sowie die Niederschlagsmenge an einem entsprechenden Messturm.
 
-%\section{Datawarehouse (DWH)}
-
-%\begin{figure}[H]
-%  \centering
-%  	\includegraphics[width=\columnwidth]{img/border}\\
-%  \caption[]{Ukraine Krimm Grenze}
-%  \label{img:border}
-%\end{figure}
+\begin{figure}[H]
+  \centering
+  	\includegraphics[width=\columnwidth]{img/star_schema}\\
+  \caption[]{Sternansicht zur speicherung von Geodaten in einem DWH\cite{ThielClemen2013}}
+  \label{img:star_schema}
+\end{figure}
 
 
-\section{Georeferenzierung}
-%- Probleme zwischen GIS und Geoserver
-%-- Geoserver speichert Daten hirachisch
-%-- Ländergrenzen ändern sich
-%-- Ländergrenzen sind nicht eindeutig (Bsp.: Krim de/ua/ru)
-%- Lösung: Grenzen unabhängige Quad-Trees
-%-- Finkel, R. A. ; Bentley, J. L. (1974): Quad trees a data structure for retrieval on composite keys. In: Acta
-%Informatica 4, Volume 1, pp. 1 – 9. – URL http://link.springer.com/article/10.1007%2FBF00288933.
+\subsection{Georeferenzierung}
+Für die Verarbeitung von Geodaten ist es notwendig Daten aus GIS und DWH zu referenzieren. Hierbei führt die Art der Speicherung laut Baldowski\cite{mariuszMaster} im DWH zu einem Problem. Geodaten werden hierarchisch, zumeist in den Kategorien Länder, Kommunen, Städte und andere politische Grenzen gespeichert. Ländergrenzen ändern sich im Verlauf der Zeit und sind selbst zu einem gegebenen Zeitpunkt nicht immer eindeutig.\\
+Beispielsweise zeigt die ukrainische Seite von Google Maps\footnote{\url{https://maps.google.com.ua/}} die Krim als Teil der Ukraine an, das russische Google Maps\footnote{\url{https://maps.google.ru/}} zeigt zwischen der Krim und der Ukraine eine Ländergrenze und in der deutschen und englischen Google Maps wird die Grenze als nicht feste Grenze (gestrichelt) dargestellt.\\
+Hieraus ergibt sich die Problematik, dass Daten in Grenzgebieten nicht auf der Gleichen Hierarchieebene sein können, was für ökologische Daten nicht geeignet ist. Verstärkt wird dieses Problem, wenn Daten über einen längeren Zeitraum betrachtet werden sollen.\\
+Eine Lösung für dieses Problem ist die Nutzung von Quad Trees\cite{quads}. Hierbei wird die Weltkarte in 4 Bereiche unterteilt. Jeder dieser Bereich besitzt 4 Teilbereiche. Diese besitzen wiederum Teilbereiche, bis zur gewünschten Detailstufe.\\
+MARS ROCK nutzt die Implementation der Quad Trees, wie sie Microsoft bei Bing Maps einsetzt (siehe \cite{waldbiomasse}). Hierbei erhalten die Bereiche eine Benennung, aus der die jeweilige Ebene hervorgeht. Es wird für jede weitere Detailstufe eine zusätzliche stelle hinzu genommen. Abbildung \ref{img:bing_quads} zeigt diese Struktur.
 
-%\begin{figure}[H]
-%  \centering
-%  	\includegraphics[height=114pt]{img/gis_quads}\\
-%  \caption[]{Darstellung von GIS als Quads}
-%  \label{img:gis_quads}
-%\end{figure}
+\begin{figure}[H]
+  \centering
+  	\includegraphics[width=\columnwidth]{img/bing_quads}\\
+  \caption[]{Darstellung als Quads von Bing Maps\cite{waldbiomasse}}
+  \label{img:bing_quads}
+\end{figure}
 
 \subsection{Zeitbezogene Daten}
 %\begin{figure}[H]
@@ -516,7 +517,6 @@ Hierbei werden Rasterbilder genutzt um ein Bereich einer Karte näher zu beschre
 
 
 \section{Zusammenfassung}
-bla\cite{mariusz}
 
 
 %\section{Tools}
