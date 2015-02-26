@@ -405,6 +405,7 @@ Bilder hoch zu skalieren ist somit mit Qualitätsverlust verbunden. Pixelbilder 
 ArcGIS ist eine Anwendung zur Erstellung, Betrachtung und Bearbeitung von GIS Daten. Sie zählt zu den besten Anwendungen, die es in diesem Bereich auf dem Markt gibt. In der GIS Anwendung ArcGIS gibt es die folgenden vier Typen für Rasterdaten.\\
 
 \subsubsection{Raster als Grundkarten}\hspace*{\fill} \\
+\label{sub:raster_grundkarte}
 Beim Raster als Grundkarte stellt ein oder mehrere gerasterte Bilder die Grundkarte dar. Darauf basierend können Informationen angezeigt werde. Diese Art von Karte ist in allen freien Kartendiensten, wie OpenStreetMap oder Google Maps verfügbar.
 
 \begin{figure}[H]
@@ -513,7 +514,7 @@ Movebank\footnote{\url{https://www.movebank.org/}} ist ein derartiges Projekt. E
 \label{sub:zeitbezogene_daten}
 Für die Erforschung, der Auswirkung des Klimawandels ist es wichtig Aufnahmen von gewissen Flächenabschnitten zu vergleichen. In der Vergangenheit mussten diese Messungen anhand von Markierungen, Boden oder Luftbildern gemacht werden. Dank fortgeschrittener Satellitentechnik sind großflächige Aufnahmen möglich geworden.\par
 
-Zu diesem Zweck hat die australische Regierung den Australian Geoscience Data Cube(AGDC) entwickelt. Dieser erlaubt die umfangreiche Auswertung von Satellitenmaterial. So wird mit Hilfe von Satelliten mit spezieller Kameras Wasserbestände in Australien gemessen.\\
+Zu diesem Zweck hat die australische Regierung den Australian Geoscience Data Cube (AGDC) entwickelt. Dieser erlaubt die umfangreiche Auswertung von Satellitenmaterial. So wird mit Hilfe von Satelliten mit spezieller Kameras Wasserbestände in Australien gemessen.\\
 Dieses Bildmaterial von unterschiedlichen Satelliten wird geclustert und zu einer Karte zusammengefügt. Dieser Vorgang wird regelmäßig wiederholt. Aus den Differenzen der Karten wird eine Heatmap gebildet, die anzeigt, wie oft ein bestimmter Bereich überflutet wurde. Diese Heatmap ist auf der Seite der australischen Regierung offen einzusehen (siehe Abbildung \ref{img:agcd_flood}).
 
 \begin{figure}[H]
@@ -528,17 +529,27 @@ Dieses Bildmaterial von unterschiedlichen Satelliten wird geclustert und zu eine
 \section{vergleichbare Systeme}
 Es existieren bereits komplette Systeme, zur Visualisierung von zeitbezogenen spazialen Daten. Diese haben entsprechend ihrem Anwendungsgebiet unterschiedliche Architekturen.
 
-\subsection{Australian Geoscience Data Cube(AGDC)}
+\subsection{Australian Geoscience Data Cube (AGDC)}
 Australiens Data Cube, der bereits in Abschnitt \ref{sub:zeitbezogene_daten} erwähnt wurde, gehört zu den größten derartigen Installationen weltweit. Das Team besteht aus 673 Mitarbeitern und hat bis zum Juli 2014 wurden 4PB, also über 4.000TB Daten gesammelt\cite{agdc}. Mit 160TB Arbeitsspeicher und 57.472 Kernen belegt der AGDC Platz 32 der Liste von Supercomputern\footnote{\url{http://top500.org/}}.\\
 Zur Speicherung von Daten wird PostgreSQL mit der Erweiterung POSTGIS für GIS Daten eingesetzt. Als Programmiersprache wird Python eingesetzt und der Quellcode ist seit Juni 2014 auf GitHub verfügbar.\par
 
 Der AGDC ist eine Lösung, dessen Einsatzmöglichkeiten auf keinen einzelnen Einsatzfall beschränkt sind. Stattdessen werden eine Vielzahl von Projekten umgesetzt. Die beiden populärsten Projekte sind die bereits erwähnte Darstellung von Hochwasserbereichen und einer Visualisierung von Vegetationsentwicklung\cite{agdc2}.
 
-\subsection{WMS flow mapping}
+\subsection{WMS flow mapping Services}
+In der Arbeit  von Guo et al.\cite{wms_flow_mapping} wird das \enquote{Web Map Service} (WMS) Protokoll des \enquote{Open Geospatial Consortium} (OGC) um die effiziente Erstellung von Strömen erweitert. Dies dient der Verbesserung, der Analyse von Echtzeit Daten, insbesondere aus sozialen Medien.\\
+WMS ist ein Standard Protokoll, das mit einer einfachen HTTP Schnittstelle arbeitet. Es wird von allen gängigen GIS Anwendungen unterstützt, hierzu zählen die im MARS Framework verwendeten ArcGIS und der GeoServer.\par
 
+Web Flow Map Services (WFMS) ermöglicht eine effiziente Generierung von Strömen. Dies ist insbesondere dann wichtig, wenn ein Diagramm auf Basis von großen Datenmengen erstellt werden soll. Ein Beispiel für ein Flow Chart mit großen Datenmengen ist das Umzugsverhalten eines ganzen Landes über mehrere Jahre hinweg betrachtet. Die Komplexität verbessert sich durch den Flow Algorithmus in WFMS von $O(n^2 )$ auf $O(n \log (n))$.\par
 
-\cite{wms_flow_mapping}
+\begin{figure}[H]
+  \centering
+  	\includegraphics[width=\columnwidth]{img/wfms}\\
+  \caption[]{WFMS Framework}
+  \label{img:wfms}
+\end{figure}
 
+Der Versuchsaufbau des WFMS Frameworks entspricht Abbildung \ref{img:wfms}. Die Dateneingaben der Echtzeitdaten und Daten aus dem Modell werden im Rechenzentrum parallel berechnet, falls sie im Cache nicht vorhanden sind. Hieraus Entstehen Zwischenergebnisse, die über WFMS an das Frontend übertragen werden.\\
+Die JavaScript Bibliothek OpenLayers stellt ein \enquote{Raster als Grundkarte} dar (siehe Abschnitt \ref{sub:raster_grundkarte}). Mögliche Datenquellen der Karten sind Google Maps, OSM und der GeoServer. Auf dieser Karte wird die Flow Karte dargestellt. Zu beachten ist, dass es sich bei dem Ergebnis des Servers nicht um eine Vektorkarte, sondern um ein gerastertes Bild handelt. OpenLayers muss diese skalieren und der Grundkarte als Layer hinzufügen.
 
 
 \section{DEIMOS}
