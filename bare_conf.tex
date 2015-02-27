@@ -493,6 +493,20 @@ MARS ROCK nutzt die Implementation der Quad Trees, wie sie Microsoft bei Bing Ma
 \end{figure}
 
 
+\section{Verschneiden von Daten}
+
+
+\subsection{Raster}
+
+
+\subsection{Vektor}
+Punkt-In-Polygon\\
+
+Linie-In-Polygon\\
+
+Polygon-In-Polygon
+
+
 \section{Visualisierung}
 Die Visualisierung von statischem Kartenmaterial ist seit der Entstehung von Google Maps, OSM und anderen Kartendiensten ein Bestandteil des Alltags geworden. Zunehmend wird die Darstellung von komplexeren spazialen Daten für die Forschung interessant (siehe \cite{gps_collars} \cite{wms_flow_mapping}).\\
 Für die Darstellung von Daten mit speziellen Anforderungen gibt es unterschiedliche Anwendungsfälle. Diese erfordern entsprechende Lösungen.
@@ -537,6 +551,7 @@ Zur Speicherung von Daten wird PostgreSQL mit der Erweiterung POSTGIS für GIS D
 Der AGDC ist eine Lösung, dessen Einsatzmöglichkeiten auf keinen einzelnen Einsatzfall beschränkt sind. Stattdessen werden eine Vielzahl von Projekten umgesetzt. Die beiden populärsten Projekte sind die bereits erwähnte Darstellung von Hochwasserbereichen und einer Visualisierung von Vegetationsentwicklung\cite{agdc2}.
 
 \subsection{WMS flow mapping Services}
+\label{sub:flow_mapping}
 In der Arbeit  von Guo et al.\cite{wms_flow_mapping} wird das \enquote{Web Map Service} (WMS) Protokoll des \enquote{Open Geospatial Consortium} (OGC) um die effiziente Erstellung von Strömen erweitert. Dies dient der Verbesserung, der Analyse von Echtzeit Daten, insbesondere aus sozialen Medien.\\
 WMS ist ein Standard Protokoll, das mit einer einfachen HTTP Schnittstelle arbeitet. Es wird von allen gängigen GIS Anwendungen unterstützt, hierzu zählen die im MARS Framework verwendeten ArcGIS und der GeoServer.\par
 
@@ -553,7 +568,7 @@ Die JavaScript Bibliothek OpenLayers stellt ein \enquote{Raster als Grundkarte} 
 \end{figure}
 
 \section{DEIMOS}
-Das Ziel für das Master Seminar ist es, die wissenschaftliche Grundlage für DEIMOS zu entwickeln und einen ersten \enquote{Durchstich} umzusetzen. Hierzu soll das Frontend inklusive Darstellung der Daten aus ROCK und GROUND in Tabellenansicht, als minimal Anforderung implementiert werden.\\
+Das Ziel für das Grundprojekt ist es, die wissenschaftliche Grundlage für DEIMOS zu entwickeln und einen ersten \enquote{Durchstich} umzusetzen. Hierzu soll das Frontend inklusive Darstellung der Daten aus ROCK und GROUND in Tabellenansicht, als minimal Anforderung implementiert werden.\\
 
 \subsection{MEAN-Stack}
 Der Softwarestack für DEIMOS ist rein JavaScript basiert und ist für die drei Komponenten der der Websuite (siehe Abbildung \ref{img:mars_websuite}) größtenteils identisch. Lediglich das SHUTTLE wird Teile in C\# enthalten. \\
@@ -567,7 +582,7 @@ Da nicht vorausgesagt werden kann, wie die Form der Abfrage am ende aussehen wir
 
 Realistisch kommen zwei Datenbanktypen in Frage. Zum einen ist die Nutzung einer relationalen Datenbank sehr üblich. In der Literatur wird PostgreSQL mit der Erweiterung POSTGIS mehrfach erwähnt (siehe \cite{wms_flow_mapping} \cite{waldbiomasse}). Eine MariaDB Datenbank kommt als Alternative in Frage.\\
 Auf Grund der starken Abhängigkeiten der Messdaten zueinander ist die Nutzung einer Graphdatenbank ebenfalls eine Möglichkeit. Solche Datenbanken Bilden ihre Daten auf Knoten und Kanten ab. Hierbei können sowohl Knoten, als auf Kanten mit Eigenschaften versehen sein.\\
-Im Master Projekt gilt es das Problem der Datenbankwahl tiefer zu durchdringen und dann eine Entscheidung zu treffen.\vspace{.5em}
+Im Grundprojekt gilt es das Problem der Datenbankwahl tiefer zu durchdringen und dann eine Entscheidung zu treffen.\vspace{.5em}
 
 \subsubsection{ExpressJS}\hspace*{\fill} \\
 Express ist ein Web Framework für NodeJS, das zudem die Erstellung von REST APIs unterstützt.\vspace{.5em}
@@ -578,17 +593,12 @@ Angular ist ein Web Framework für JavaScript. Es erweitert die HTML Syntax für
 \subsubsection{NodeJS}\hspace*{\fill} \\
 Node ist eine Laufzeit Umgebung, die es ermöglicht JavaScript serverseitig auszuführen. Node läuft auf Basis der JavaScript V8 Engine, die von Google für den Chrome Browser entwickelt wurde. Es läuft in einem einzigen Thread und verfügt über eine \enquote{non-blocking I/O API}. Diese führt dazu, dass der Thread niemals angehalten werden muss. Stattdessen werden Berechnungen mit einem Callback versehen, der den Programmablauf beeinflusst.
 
-\subsection{Verschneiden von Daten}
-
-\subsubsection{Raster}\hspace*{\fill} \\
-
-
-\subsubsection{Vektor}\hspace*{\fill} \\
-Punkt-In-Polygon\\
-
-Linie-In-Polygon\\
-
-Polygon-In-Polygon
+\subsection{Kartendarstellung}
+Die Kartendarstellung im Browser soll nach aktueller Planung LeafletJS\footnote{\url{http://leafletjs.com/}} übernehmen. Leaflet gehört mit ObenLayers zu den bekanntesten, frei verfügbaren JavaScript Bibliotheken zur Kartendarstellung.\\
+Die Recherche hat ergeben, dass in komplexeren Einsatzgebieten OpenLayers bevorzugt wird (siehe \cite{mariuszMaster} \cite{quads} \cite{wms_flow_mapping}).\\
+OpenLayers ist jedoch mit 770kb Dateigröße ein sehr schwergewichtiges JavaScript Framework, Leaflet hingegen umfasst lediglich 125kb. JQuery, dass im allgemeinen als nicht sonderlich leichtgewichtig gilt ist lediglich 84kb groß.\\
+Diese Größen mögen sich auf den ersten Blick als nicht relevant erweisen. Hierbei wird jedoch vernachlässigt, dass diese Frameworks beim Seitenaufbau geladen werden müssen, was insbesonders bei langsamen Internetverbindungen zur Beeinträchtigung der Benutzbarkeit führt.\\
+Zudem ist Leaflet ein jüngeres und leichter bedienbares Framework. Es wird deshalb zunächst als bevorzugtes betrachtet. Sollte sich herausstellen, dass eine Umsetzung hiermit zu schwierig oder nicht möglich ist, wird eine Umstellung durchgeführt.
 
 
 \section{Zusammenfassung}
