@@ -348,19 +348,38 @@ Email: {\tt lennart.karsten@haw-hamburg.de}}\\
 
 
 \section{Einleitung}
-In den vergangenen Jahren haben digitale Karten, analoge Karten nahezu vom Markt verdrängt. Google Maps, Open Streetview und andere Projekte bieten mittlerweile eine fast vollständige Übersicht de Erde. Das Auffinden von Orten oder die Routenplanung sind gelöste Probleme der Wissenschaft.\\
+In den vergangenen Jahren haben digitale Karten, analoge Karten nahezu vom Markt verdrängt. Google Maps, Open Streetview und andere Projekte bieten mittlerweile eine fast vollständige Übersicht der Erde. Das Auffinden von Orten oder die Routenplanung sind gelöste Probleme der Wissenschaft.\\
 Auf Grund der hohen Qualität, Auflösung und Flexibilität haben sich u.a. neue Bereiche für Geologen und Biologen erschlossen.\\
-Deren Anwendungsfälle variieren jedoch stark von der üblichen Nutzung. Der Größte Unterschied ist die Relevanz von Zeit. Ein Beispiel ist, das Messen von Temperaturwerten an bestimmten Orten über einen langen Zeitraum. Ein anderes Anwendungsgebiet ist die Erforschung von Tierarten und deren geografische Bewegung.\\
+Deren Anwendungsfälle unterscheiden jedoch stark von der üblichen Nutzung. Der Größte Unterschied ist die Relevanz von Zeit in Bezug zum Raum, den sog. gemischten spatialen Indikatoren. Ein Beispiel ist, das Messen von Temperaturwerten an bestimmten Orten über einen langen Zeitraum. Ein anderes Anwendungsgebiet ist die Erforschung von Tierarten und deren geografische Bewegung.\\
 Für die visuelle Darstellung solcher zeitbezogenen spatialen Daten, bedarf es Anwendungen, die eine effiziente Nutzung durch technisch nicht versierte Personen ermöglicht.
 
 \section{MARS Gruppe}
-%Massive Nutzung von Multi-Agenten Systemen 
-%sehr große spatiale Räume
-%lange Simulationslaufzeiten
-%Big Data mit Raum- und Zeitbezug
-Mars ist das Akronym für Multi-Agent Research \& Simulation, die Arbeitsgruppe von Prof. Dr. Thiel-Clemen. Die Arbeitsgruppe befasst sich mit mit der Erstellung von Multi-Agenten Systemen (MAS).\\
+MARS ist das Akronym für Multi-Agent Research \& Simulation, die Arbeitsgruppe von Prof. Dr. Thiel-Clemen. Diese befasst sich mit mit der Erstellung von Multi-Agenten Systemen (MAS). Hierbei werden Berechnungen auf großen spatialen Räumen durchgeführt. Hieraus ergeben sich lange Simulationszeiten. MARS betreibt somit Big Data mit Raum- und Zeitbezug.\\
 Zentrales Element der Arbeitsgruppe ist das MARS Framework. Dieses besteht aus den Komponenten Modellierung, Websuite, Life, sowie der Qualitätskontrolle und dem Versionsmanagement.\\
-Für diese Arbeit ist lediglich die Websuite von Bedeutung. Diese ist in der Entstehung und besteht aus folgenden Komponenten (siehe Abbildung \ref{img:mars_websuite}).
+Für diese Arbeit ist lediglich die Websuite von Bedeutung. Diese ist in der Entstehung und besteht aus folgenden Komponenten (siehe Abbildung \ref{img:mars_websuite}).\\
+Die Komponenten leiten sich namentlich von dem Planet Mars ab. Deimos (Abschnitt \ref{sub:deimos}) und Phobos (Abschnitt \ref{sub:phobos}) sind die zwei Monde des Planeten Mars.
+
+\subsection{MARS PHOBOS}
+\label{sub:phobos}
+PHOBOS ist für den Import von Daten in das MARS Framework zuständig. Es importiert Daten der Anwender und Modellierer. Zudem konvertiert es zu importierende Daten und speichert diese in GROUND und ROCK.\\
+Die Arbeiten von PHOBOS, DEIMOS und dem SHUTTLE hängen dicht miteinander zusammen und erfordern deshalb eine entsprechende Koordinierung.
+
+\subsection{MARS GROUND}
+GROUND nutzt den Geoserver\footnote{\url{http://geoserver.org/}} zur Speicherung von Daten im Geoinformationssystem (GIS). Er implementiert den Web Map Service (WMS) Standard, der den Zugriff auf das Kartenmaterial über HTTP ermöglicht. Neben der Übertragung verfügt der Geoserver über eine API, die im begrenzten Rahmen Konvertierungsarbeiten übernehmen kann.
+
+\subsection{MARS ROCK}
+Die ROCK Komponente ist für die Verwaltung aller Daten zuständig, die nicht mit dem Geoserver kompatibel sind. Hierzu zählen nicht-spatiale Daten und GIS Formate, die nicht mit dem Geoserver kompatibel sind. Der Großteil der Daten im ROCK sind zeitlich veränderliche Daten, wie beispielsweise Bevölkerungszahlen.
+
+\subsection{MARS DEIMOS}
+\label{sub:deimos}
+DEIMOS arbeitet auf Basis der Daten, die durch PHOBOS importiert werden. Daher ist es wichtig, dass Anforderungen an die Visualisierung beim Import berücksichtigt werden. Dies erfordert eine enge Zusammenarbeit zwischen DEIMOS und PHOBOS.\\
+Die Aufgabe von DEIMOS ist es, eine Webanwendung bereit zu stellen, die es dem Endnutzer und Simulationsentwickler erlaubt die Datenbestände in GROUND und ROCK zu sichten.\\
+Hierbei liegt der Fokus auf der Visualisierung unterschiedlicher Datentypen und der Möglichkeit alle importierten Daten tabellarisch einzusehen.\\
+Dem Benutzer soll es möglich sein, Daten für eine Simulation auszuwählen. Diese werden in einer JSON Datei benannt und die Datei wird an SHUTTLE übergeben.
+
+\subsection{MARS SHUTTLE}
+Das SHUTTLE ließt die \enquote{Data Descriptor} Datei, kommend von DEIMOS aus und lädt die entsprechenden Daten aus GROUND und ROCK. anschließend erstellt es eine \enquote{Scenario Configuration} Datei und sendet diese an das MARS LIFE.\\
+MARS LIFE beinhaltet die Simulationen.
 
 \begin{figure}[H]
   \centering
@@ -368,24 +387,6 @@ Für diese Arbeit ist lediglich die Websuite von Bedeutung. Diese ist in der Ent
   \caption[]{Die Websuite des Mars Frameworks}
   \label{img:mars_websuite}
 \end{figure}
-
-\subsection{MARS PHOBOS}
-PHOBOS ist für den Import von Daten in das MARS Framework zuständig. Es importiert Daten der Anwender und Modellierer. Zudem konvertiert es zu importierende Daten und speichert diese in GROUND und ROCK.
-
-\subsection{MARS GROUND}
-GROUND nutzt den Geoserver\footnote{\url{http://geoserver.org/}} zur Speicherung von Daten im Geoinformationssystem (GIS). Es verfügt über eine API, die im begrenzten Rahmen Konvertierungsarbeiten übernehmen kann.
-
-\subsection{MARS ROCK}
-Die ROCK Komponente ist für die Verwaltung aller Daten zuständig, die nicht mit dem Geoserver kompatibel sind. Hierzu zählen nicht-spatiale Daten und GIS Formate, die nicht mit dem Geoserver kompatibel sind. Der Großteil der Daten im ROCK sind zeitlich veränderliche Daten, wie beispielsweise Bevölkerungszahlen.
-
-\subsection{MARS DEIMOS}
-DEIMOS arbeitet auf Basis der Daten, die durch PHOBOS importiert werden. Es stellt eine Webanwendung bereit, die es dem Benutzer erlaubt die Datenbestände in GROUND und ROCK zu sichten. Hierbei liegt der Fokus auf der Visualisierung unterschiedlicher Datentypen.\\
-Dem Benutzer soll es möglich sein, Daten für eine Simulation auszuwählen. Diese werden in einer JSON Datei benannt und die Datei wird an SHUTTLE übergeben.
-
-\subsection{MARS SHUTTLE}
-Das SHUTTLE ließt die \enquote{Data Descriptor} Datei, kommend von DEIMOS aus und lädt die entsprechenden Daten aus GROUND und ROCK. anschließend erstellt es eine \enquote{Scenario Configuration} Datei und sendet diese an das MARS LIFE.\\
-MARS LIFE beinhaltet die Simulationen.
-
 
 \section{Geoinformationssystem (GIS)}
 Geoinformationssysteme sind für die Erfassung, Bearbeitung, Organisation, Analyse und Präsentation von Geo-Daten zuständig. In der MARS Gruppe, welcher der Autor dieser Arbeit angehört Wird die Verwaltung des GIS durch MARS GROUND realisiert.\\
@@ -402,11 +403,10 @@ Bilder hoch zu skalieren ist somit mit Qualitätsverlust verbunden. Pixelbilder 
 \end{itemize}
 
 \subsection{ArcGIS Rastertypen}
-ArcGIS ist eine Anwendung zur Erstellung, Betrachtung und Bearbeitung von GIS Daten. Sie zählt zu den besten Anwendungen, die es in diesem Bereich auf dem Markt gibt. In der GIS Anwendung ArcGIS gibt es die folgenden vier Typen für Rasterdaten.\\
+ArcGIS ist eine Anwendung zur Erstellung, Betrachtung und Bearbeitung von GIS Daten. Es zählt zu den besten Anwendungen, die es in diesem Bereich auf dem Markt gibt. In ArcGIS werden die folgenden vier Typen von Rasterdaten unterschieden.\\
 
 \subsubsection{Raster als Grundkarten}\hspace*{\fill} \\
-\label{sub:raster_grundkarte}
-Beim Raster als Grundkarte stellt ein oder mehrere gerasterte Bilder die Grundkarte dar. Darauf basierend können Informationen angezeigt werde. Diese Art von Karte ist in allen freien Kartendiensten, wie OpenStreetMap oder Google Maps verfügbar.
+\label{sub:raster_grundkarte}Beim Raster als Grundkarte stellt ein oder mehrere gerasterte Bilder die Grundkarte dar. Darauf basierend können Informationen angezeigt werde. Diese Art von Karte ist der gängigste und in allen freien Kartendiensten, wie OpenStreetMap oder Google Maps verfügbar. Häufig wird die Grundkarte zur Orientierung genutzt und mit weiteren Layern ergänzt. So können beispielsweise Fahrradwege als Vektor oder Oberflächenkarte über die Grundkarte gelegt werden.
 
 \begin{figure}[H]
   \centering
@@ -416,7 +416,7 @@ Beim Raster als Grundkarte stellt ein oder mehrere gerasterte Bilder die Grundka
 \end{figure}
 
 \subsubsection{Raster als Oberflächenkarten}\hspace*{\fill} \\
-Im Gegensatz zu dem Raster als Grundkarte liegt bei Oberflächenkarten die Fokussierung nicht auf infrastrukturellen Merkmalen. Vielmehr werden spatiale Daten durch bestimmte Farbgebung dargestellt. Häufige Anwendung sind Höhenkarten.
+Im Gegensatz zu dem Raster als Grundkarte liegt bei Oberflächenkarten die Fokussierung nicht auf infrastrukturellen Merkmalen. Vielmehr werden spatiale Daten durch bestimmte Farbgebung dargestellt. Somit geht es bei der Oberflächenkarte nicht um die reine Orientierung in einem Bereich, sondern vielmehr um die Darstellung gewonnener Ergebnisse. Diese können Als Ergebnis einer GIS Operation entstehen. Häufige Anwendung sind Höhenkarten.
 
 \begin{figure}[H]
   \centering
@@ -449,14 +449,15 @@ Hierbei werden Rasterbilder genutzt um ein Bereich einer Karte näher zu beschre
 \footnotetext{\url{http://www.panoramio.com/}}
 
 \subsection{GIS Vektordaten}
-Vektorgrafiken basieren im Gegensatz zu Rasterbildern auf mathematischen Formen. Hierzu zählen Kreise, Rechtecke und allgemeine Kurven. Vektorgrafiken eignen sich besonders für Schematische Darstellung und sind für Fotografien ungeeignet. Sie sind auf Grund ihrer Beschaffenheit beliebig skalierbar.\\
-GIS Vektordaten bestehen aus Punkten, Linien und Polygonen.
+Vektorgrafiken basieren im Gegensatz zu Rasterbildern auf mathematischen Formen. Hierzu zählen Kreise, Rechtecke und allgemeine Kurven. Ein Vektor hat immer ein Position bestehend aus X und Y. Die Art der Darstellung kann abhängig von dem gewünschten Einsatzgebiet unterschiedlich dargestellt werden. Dies macht sie erheblich flexibler, als Rasterdaten.\\
+Vektorgrafiken eignen sich besonders für Schematische Darstellung und sind für Fotografien ungeeignet. Sie sind auf Grund ihrer Beschaffenheit beliebig skalierbar.\\
+GIS Vektordaten bestehen aus Punkten, Linien und Polygonen.\vspace{.5em}
 
 \subsubsection{Punkte}\hspace*{\fill} \\
-Punkte sind das Grundelement, auf ihnen bauen die anderen Formen auf. Ein Punkt besteht aus einer X und einer Y Koordinate. Elemente, die als Punkt dargestellt werden sind z.B. Geopositionen.
+Punkte sind das Grundelement, auf ihnen bauen die anderen Formen auf. Ein Punkt besteht aus einer X und einer Y Koordinate. Elemente, die als Punkt dargestellt werden sind z.B. Geopositionen.\vspace{.5em}
 
 \subsubsection{Linien}\hspace*{\fill} \\
-Linien werden durch eine mathematische Funktion dargestellt um die Form exakt zu beschreiben. Technisch wird eine Linie als zwei Punkte mit einer Verbindung umgesetzt.
+Linien werden durch eine mathematische Funktion dargestellt um die Form exakt zu beschreiben. Technisch wird eine Linie als zwei Punkte mit einer Verbindung umgesetzt.\vspace{.5em}
 
 \subsubsection{Polygone}\hspace*{\fill} \\
 Ein Polygon ist eine geschlossene Form bestehend aus Linien und Punkten. Es kann Eigenschaften, wie den Flächeninhalt besitzen. Beispiele für Polygone sind Rechtecke, Kreise und Dreiecke.
@@ -482,7 +483,7 @@ Beispielsweise zeigt die ukrainische Seite von Google Maps\footnote{\url{https:/
 Hieraus ergibt sich die Problematik, dass Daten in Grenzgebieten nicht auf der Gleichen Hierarchieebene sein können, was für ökologische Daten nicht geeignet ist. Verstärkt wird dieses Problem, wenn Daten über einen längeren Zeitraum betrachtet werden sollen.\par
 
 Eine Lösung für dieses Problem ist die Nutzung von Quad Trees\cite{quads}. Hierbei wird die Weltkarte in 4 Bereiche unterteilt. Jeder dieser Bereich besitzt 4 Teilbereiche. Diese besitzen wiederum Teilbereiche, bis zur gewünschten Detailstufe.\\
-MARS ROCK nutzt die Implementation der Quad Trees, wie sie Microsoft bei Bing Maps einsetzt (siehe \cite{waldbiomasse}). Hierbei erhalten die Bereiche eine Benennung, aus der die jeweilige Ebene hervorgeht. Es wird für jede weitere Detailstufe eine zusätzliche stelle hinzu genommen. Abbildung \ref{img:bing_quads} zeigt diese Struktur.
+MARS ROCK nutzt die Implementation der Quad Trees, wie sie Microsoft bei Bing Maps einsetzt (siehe \cite{waldbiomasse}) wird. Hierbei erhalten die Bereiche eine Benennung, aus der die jeweilige Ebene hervorgeht. Es wird für jede weitere Detailstufe eine zusätzliche stelle hinzu genommen. Abbildung \ref{img:bing_quads} zeigt diese Struktur.
 
 \begin{figure}[H]
   \centering
@@ -541,37 +542,57 @@ WMS ist ein Standard Protokoll, das mit einer einfachen HTTP Schnittstelle arbei
 
 Web Flow Map Services (WFMS) ermöglicht eine effiziente Generierung von Strömen. Dies ist insbesondere dann wichtig, wenn ein Diagramm auf Basis von großen Datenmengen erstellt werden soll. Ein Beispiel für ein Flow Chart mit großen Datenmengen ist das Umzugsverhalten eines ganzen Landes über mehrere Jahre hinweg betrachtet. Die Komplexität verbessert sich durch den Flow Algorithmus in WFMS von $O(n^2 )$ auf $O(n \log (n))$.\par
 
-\begin{figure}[H]
-  \centering
-  	\includegraphics[width=\columnwidth]{img/wfms}\\
-  \caption[]{WFMS Framework}
-  \label{img:wfms}
-\end{figure}
-
 Der Versuchsaufbau des WFMS Frameworks entspricht Abbildung \ref{img:wfms}. Die Dateneingaben der Echtzeitdaten und Daten aus dem Modell werden im Rechenzentrum parallel berechnet, falls sie im Cache nicht vorhanden sind. Hieraus Entstehen Zwischenergebnisse, die über WFMS an das Frontend übertragen werden.\\
 Die JavaScript Bibliothek OpenLayers stellt ein \enquote{Raster als Grundkarte} dar (siehe Abschnitt \ref{sub:raster_grundkarte}). Mögliche Datenquellen der Karten sind Google Maps, OSM und der GeoServer. Auf dieser Karte wird die Flow Karte dargestellt. Zu beachten ist, dass es sich bei dem Ergebnis des Servers nicht um eine Vektorkarte, sondern um ein gerastertes Bild handelt. OpenLayers muss diese skalieren und der Grundkarte als Layer hinzufügen.
 
+\begin{figure}[H]
+  \centering
+  	\includegraphics[width=\columnwidth]{img/wfms}\\
+  \caption[]{WFMS Framework\cite{wms_flow_mapping}}
+  \label{img:wfms}
+\end{figure}
 
 \section{DEIMOS}
-%Was ist Deimos etc.
+Das Ziel für das Master Seminar ist es, die wissenschaftliche Grundlage für DEIMOS zu entwickeln und einen ersten \enquote{Durchstich} umzusetzen. Hierzu soll das Frontend inklusive Darstellung der Daten aus ROCK und GROUND in Tabellenansicht, als minimal Anforderung implementiert werden.\\
 
-\subsection{client Server Modell erklären}
-%
+\subsection{MEAN-Stack}
+Der Softwarestack für DEIMOS ist rein JavaScript basiert und ist für die drei Komponenten der der Websuite (siehe Abbildung \ref{img:mars_websuite}) größtenteils identisch. Lediglich das SHUTTLE wird Teile in C\# enthalten. \\
+Das Akronym \enquote{MEAN} besteht aus den drei Anfangsbuchstaben der enthaltenen Frameworks. Der JavaScript MEAN-Stack besteht aus folgenden Komponenten:
+
+\subsubsection{MongoDB}\hspace*{\fill} \\
+MongoDB ist ein Dokumenten basiertes Datenbanksystem, dass seine Daten nicht in relationalen Tabellen abspeichert. Stattdessen wird in binären JSON Dateien gespeichert, sog. BSON Dateien. MongoDB ist die Standard Datenbank im MEAN-Stack und zudem sehr einfach zu bedienen. Aus diesem Grund ist sie derzeit für die Speicherung von Metadaten der zu importierenden Daten durch PHOBOS angedacht.\\
+In den vergangenen Wochen kam jedoch die Frage auf, inwiefern die Nutzung dieser Speicherungsform geeignet sei. MongoDB ist besonders gut für die Speicherung von Objekten geeignet. Die zu speichernden Daten werden jedoch auf viele unterschiedliche Arten abgefragt.\\
+Wenn angenommen wird, dass Messdaten nach Projekten und Tierarten gespeichert sind würde eine Suche in einem geografischen Bereich eine Vielzahl von Objekten betreffen aus denen jeweils Teilmengen benötigt wird.\\
+Da nicht vorausgesagt werden kann, wie die Form der Abfrage am ende aussehen wird und MongoDB keine Querreferenzierung unterstützt gilt die Frage zu klären, welche Alternativen in Frage kommen.\par
+
+Realistisch kommen zwei Datenbanktypen in Frage. Zum einen ist die Nutzung einer relationalen Datenbank sehr üblich. In der Literatur wird PostgreSQL mit der Erweiterung POSTGIS mehrfach erwähnt (siehe \cite{wms_flow_mapping} \cite{waldbiomasse}). Eine MariaDB Datenbank kommt als Alternative in Frage.\\
+Auf Grund der starken Abhängigkeiten der Messdaten zueinander ist die Nutzung einer Graphdatenbank ebenfalls eine Möglichkeit. Solche Datenbanken Bilden ihre Daten auf Knoten und Kanten ab. Hierbei können sowohl Knoten, als auf Kanten mit Eigenschaften versehen sein.\\
+Im Master Projekt gilt es das Problem der Datenbankwahl tiefer zu durchdringen und dann eine Entscheidung zu treffen.\vspace{.5em}
+
+\subsubsection{ExpressJS}\hspace*{\fill} \\
+Express ist ein Web Framework für NodeJS, das zudem die Erstellung von REST APIs unterstützt.\vspace{.5em}
+
+\subsubsection{AngularJS}\hspace*{\fill} \\
+Angular ist ein Web Framework für JavaScript. Es erweitert die HTML Syntax für die Nutzung von dynamischen Inhalten. Das von Google entwickelte Framework nutzt Model-View-Controller (MVC) zur Handhabung und Aktuallisierung von Daten. Angular spricht über xmlHttpRequests mit der ExpressJS API.\vspace{.5em}
+
+\subsubsection{NodeJS}\hspace*{\fill} \\
+Node ist eine Laufzeit Umgebung, die es ermöglicht JavaScript serverseitig auszuführen. Node läuft auf Basis der JavaScript V8 Engine, die von Google für den Chrome Browser entwickelt wurde. Es läuft in einem einzigen Thread und verfügt über eine \enquote{non-blocking I/O API}. Diese führt dazu, dass der Thread niemals angehalten werden muss. Stattdessen werden Berechnungen mit einem Callback versehen, der den Programmablauf beeinflusst.
 
 \subsection{Verschneiden von Daten}
-%- Raster
-%- Vektor
-%-- Punkt-In-Polygon
-%-- Linie-In-Polygon
-%-- Polygon-In-Polygon
+
+\subsubsection{Raster}\hspace*{\fill} \\
+
+
+\subsubsection{Vektor}\hspace*{\fill} \\
+Punkt-In-Polygon\\
+
+Linie-In-Polygon\\
+
+Polygon-In-Polygon
 
 
 \section{Zusammenfassung}
 
-
-%\section{Tools}
-%- https://www.movebank.org/
-%- geospatial
 
 
 \bibliographystyle{IEEEtran}
