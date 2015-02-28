@@ -492,19 +492,67 @@ MARS ROCK nutzt die Implementation der Quad Trees, wie sie Microsoft bei Bing Ma
   \label{img:bing_quads}
 \end{figure}
 
+\subsection{Formate}
+Um eine Georeferenzierung durchführen zu können ist es wichtig, dass die Daten in einer einheitlichen Form gespeichert werden.\\
+Zuvor Müssen das Informationsmaterial in das Koordinatensystem eingepasst werden ein Ortsbezug hergestellt werden. Hierzu müssen Krümmungen der Erde angeglichen, oder beseitigt werden.\\
+Baldowski Beschreibt in seiner Arbeit hierzu die folgenden Typen.
+
+\subsubsection{GeoTIFF}\hspace*{\fill} \\
+GeoTIFF (.geotiff) ist ebenso wie TIFF ein Format, welches verlustfrei speichert. GeoTIFF speichert zusätzlich zu den Rasterkarten die Geokoordinaten und den Bildausschnitt. Dieser Typ von Speicherung wird insbesondere für Satellitenaufnahmen verwendet.
+
+\subsubsection{Erdas Imagine}\hspace*{\fill} \\
+Bei diesem Format handelt es sich um ein Rasterformat, dass primär von kommerziellen Anwendungen verwendet wird. Die Dateiendung ist .img. Erdas Imagine wurde von ESRI\footnote{\url{http://www.esri.de/}}
+
+\subsubsection{Shapefile}\hspace*{\fill} \\
+Shapefiles (.shp) wurden ebenfalls von ESRI entwickelt. Dieses Format ist auf Grund seiner Einfachheit und geringen Overhead das gängigste zur Speicherung von GIS. In Shapefiles können jeweils nur eine Art von daten gespeichert werden (Punkte, Linien, Polygone).
+
+\subsubsection{•}\hspace*{\fill} \\
+GeoJSON (.json, .geojson) sind Dateien, die Geoinformationen in JSON (JavaScript Object Notation) speichern. GeoJSON ist sehr einfach zu lesen und verfügt über eine geringe Dateigröße. Es wird sowohl in kommerziellen, als auch in freien Anwendungen verwendet.
+
 
 \section{Verschneiden von Daten}
+Für die Darstellung von Geodaten in einem bestimmten geographischem Gebiet ist es notwendig die Geodaten miteinander zu verschneiden. Hierbei werden die Ebenen skaliert und als Layer übereinander gelegt.
 
+\subsection{Vektor und Vektor}
+Bei der Verschneidung von Vektoren mit Vektoren muss zwischen den Vektortypen Punkt, Linie und Polygon unterschieden werden.
 
-\subsection{Raster}
+\subsubsection{Punkt in Polygon}\hspace*{\fill} \\
+Bei der Verschneidung von Punkten im Polygon werden die Punkte, die sich innerhalb des Polygons befinden verschnitten.
 
+\begin{figure}[H]
+  \centering
+  	\includegraphics[width=\columnwidth]{img/punkt_in_polygon}\\
+  \caption[]{Punkt in Polygon Verschnitt\cite{mariuszMaster}}
+  \label{img:punkt_in_polygon}
+\end{figure}
 
-\subsection{Vektor}
-Punkt-In-Polygon\\
+\subsubsection{Linie in Polygon}\hspace*{\fill} \\
+Hierbei wird die Linie, die das Polygon durchläuft in zwei Teilsegmente geteilt.
 
-Linie-In-Polygon\\
+\begin{figure}[H]
+  \centering
+  	\includegraphics[width=\columnwidth]{img/linie_in_polygon}\\
+  \caption[]{Linie in Polygon Verschnitt\cite{mariuszMaster}}
+  \label{img:linie_in_polygon}
+\end{figure}
 
-Polygon-In-Polygon
+\subsubsection{Polygon in Polygon}\hspace*{\fill} \\
+Die Verschneidung von Polygonen mit Polygonen ergibt neue Formen als Summer der Teilmengen.
+
+\begin{figure}[H]
+  \centering
+  	\includegraphics[width=\columnwidth]{img/polygon_in_polygon}\\
+  \caption[]{Polygon in Polygon Verschnitt\cite{mariuszMaster}}
+  \label{img:polygon_in_polygon}
+\end{figure}
+
+\subsection{Raster und Raster}
+Für die Verschneidung von Rasterdaten untereinander ist notwendig, dass die Datensätze verschiedene Voraussetzungen erfüllen.\\
+Die Daten müssen den exakt gleichen Bereich referenzieren. Zudem muss die Qualität übereinstimmen. Dies muss pixelgenau durchgeführt werden.\\
+Die eigentliche Verschneidung erfolgt durch eine pixelweise Differenzenbildung. Das Ergebnis enthält somit Die Summe an Informationen beider Bilder.
+
+\subsection{Vektor und Raster}
+Bei der Verschneidung von Vektor- und Rasterdaten werden die Vektordaten in die Form der Rasterdaten gebracht und dann wie Raster und Raster behandelt.
 
 
 \section{Visualisierung}
