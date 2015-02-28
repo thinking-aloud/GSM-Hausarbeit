@@ -348,16 +348,15 @@ Email: {\tt lennart.karsten@haw-hamburg.de}}\\
 
 
 \section{Einleitung}
-In den vergangenen Jahren haben digitale Karten, analoge Karten nahezu vom Markt verdrängt. Google Maps, Open Streetview und andere Projekte bieten mittlerweile eine fast vollständige Übersicht der Erde. Das Auffinden von Orten oder die Routenplanung sind gelöste Probleme der Wissenschaft.\\
-Auf Grund der hohen Qualität, Auflösung und Flexibilität haben sich u.a. neue Bereiche für Geologen und Biologen erschlossen.\\
-Deren Anwendungsfälle unterscheiden jedoch stark von der üblichen Nutzung. Der Größte Unterschied ist die Relevanz von Zeit in Bezug zum Raum, den sog. gemischten spatialen Indikatoren. Ein Beispiel ist, das Messen von Temperaturwerten an bestimmten Orten über einen langen Zeitraum. Ein anderes Anwendungsgebiet ist die Erforschung von Tierarten und deren geografische Bewegung.\\
+In den vergangenen Jahren haben digitale Karten, analoge Karten nahezu vom Markt verdrängt. Google Maps, Open StreetMap und andere Projekte bieten mittlerweile eine fast vollständige Übersicht der Erde. Das Auffinden von Orten oder die Routenplanung sind gelöste Probleme der Wissenschaft.\\
+Auf Grund der hohen Qualität, Auflösung und Flexibilität haben sich u.a. neue Bereiche für Geologen und Biologen erschlossen. Deren Anwendungsfälle unterscheiden jedoch stark von der üblicher Nutzer. Der Größte Unterschied ist die Relevanz von Zeit in Bezug zum Raum, den sog. gemischten spatialen Indikatoren. Ein Beispiel ist, das Messen von Temperaturwerten an bestimmten Orten über einen langen Zeitraum. Ein anderes Anwendungsgebiet ist die Erforschung von Tierarten und deren geografische Bewegung.\\
 Für die visuelle Darstellung solcher zeitbezogenen spatialen Daten, bedarf es Anwendungen, die eine effiziente Nutzung durch technisch nicht versierte Personen ermöglicht.
 
 \section{MARS Gruppe}
 MARS ist das Akronym für Multi-Agent Research \& Simulation, die Arbeitsgruppe von Prof. Dr. Thiel-Clemen. Diese befasst sich mit mit der Erstellung von Multi-Agenten Systemen (MAS). Hierbei werden Berechnungen auf großen spatialen Räumen durchgeführt. Hieraus ergeben sich lange Simulationszeiten. MARS betreibt somit Big Data mit Raum- und Zeitbezug.\\
-Zentrales Element der Arbeitsgruppe ist das MARS Framework. Dieses besteht aus den Komponenten Modellierung, Websuite, Life, sowie der Qualitätskontrolle und dem Versionsmanagement.\\
+Zentrales Element der Arbeitsgruppe ist das MARS Framework. Dieses besteht aus den Komponenten Modellierung, Websuite, LIFE, sowie der Qualitätskontrolle und dem Versionsmanagement.\\
 Für diese Arbeit ist lediglich die Websuite von Bedeutung. Diese ist in der Entstehung und besteht aus folgenden Komponenten (siehe Abbildung \ref{img:mars_websuite}).\\
-Die Komponenten leiten sich namentlich von dem Planet Mars ab. Deimos (Abschnitt \ref{sub:deimos}) und Phobos (Abschnitt \ref{sub:phobos}) sind die zwei Monde des Planeten Mars.
+Die Komponenten leiten sich namentlich von dem Planet Mars ab. DEIMOS (Abschnitt \ref{sub:deimos}) und PHOBOS (Abschnitt \ref{sub:phobos}) sind die zwei Monde des Planeten Mars.
 
 \subsection{MARS PHOBOS}
 \label{sub:phobos}
@@ -406,7 +405,7 @@ Bilder hoch zu skalieren ist somit mit Qualitätsverlust verbunden. Pixelbilder 
 ArcGIS ist eine Anwendung zur Erstellung, Betrachtung und Bearbeitung von GIS Daten. Es zählt zu den besten Anwendungen, die es in diesem Bereich auf dem Markt gibt. In ArcGIS werden die folgenden vier Typen von Rasterdaten unterschieden.\\
 
 \subsubsection{Raster als Grundkarten}\hspace*{\fill} \\
-\label{sub:raster_grundkarte}Beim Raster als Grundkarte stellt ein oder mehrere gerasterte Bilder die Grundkarte dar. Darauf basierend können Informationen angezeigt werde. Diese Art von Karte ist der gängigste und in allen freien Kartendiensten, wie OpenStreetMap oder Google Maps verfügbar. Häufig wird die Grundkarte zur Orientierung genutzt und mit weiteren Layern ergänzt. So können beispielsweise Fahrradwege als Vektor oder Oberflächenkarte über die Grundkarte gelegt werden.
+\label{sub:raster_grundkarte}Beim Raster als Grundkarte stellt ein oder mehrere gerasterte Bilder die Grundkarte dar. Darauf basierend können Informationen angezeigt werde. Diese Art von Karte ist der gängigste und in allen freien Kartendiensten, wie OpenStreetMap (OSM) oder Google Maps verfügbar. Häufig wird die Grundkarte zur Orientierung genutzt und mit weiteren Layern ergänzt. So können beispielsweise Fahrradwege als Vektor oder Oberflächenkarte über die Grundkarte gelegt werden.
 
 \begin{figure}[H]
   \centering
@@ -416,7 +415,7 @@ ArcGIS ist eine Anwendung zur Erstellung, Betrachtung und Bearbeitung von GIS Da
 \end{figure}
 
 \subsubsection{Raster als Oberflächenkarten}\hspace*{\fill} \\
-Im Gegensatz zu dem Raster als Grundkarte liegt bei Oberflächenkarten die Fokussierung nicht auf infrastrukturellen Merkmalen. Vielmehr werden spatiale Daten durch bestimmte Farbgebung dargestellt. Somit geht es bei der Oberflächenkarte nicht um die reine Orientierung in einem Bereich, sondern vielmehr um die Darstellung gewonnener Ergebnisse. Diese können Als Ergebnis einer GIS Operation entstehen. Häufige Anwendung sind Höhenkarten.
+Im Gegensatz zu dem Raster als Grundkarte liegt bei Oberflächenkarten die Fokussierung nicht auf infrastrukturellen Merkmalen. Vielmehr werden spatiale Daten durch bestimmte Farbgebung dargestellt. Somit geht es bei der Oberflächenkarte nicht um die reine Orientierung in einem Bereich, sondern vielmehr um die Darstellung gewonnener Ergebnisse. Diese können als Ergebnis einer GIS Operation entstehen. Häufige Anwendung sind Höhenkarten.
 
 \begin{figure}[H]
   \centering
@@ -464,7 +463,7 @@ Ein Polygon ist eine geschlossene Form bestehend aus Linien und Punkten. Es kann
 
 
 \section{Datawarehouse (DWH)}
-Ein Data-Warehouse (DWH) ist eine Datenbankgestützte Anwendung, die Informationen zur Datenanalyse speichert. Dieser Ansatz findet zunehmend Verwendung für die Speicherung von Geo bezogenen Daten (siehe \cite{Kelling2009} \cite{McGuire2008} \cite{olap}).\par
+Ein Data-Warehouse (DWH) ist eine Datenbank gestützte Anwendung, die Informationen zur Datenanalyse speichert. Dieser Ansatz findet zunehmend Verwendung für die Speicherung von geobezogenen Daten (siehe \cite{Kelling2009} \cite{McGuire2008} \cite{olap}).\par
 
 In der Arbeit von Thiel-Clemen\cite{ThielClemen2013} aus dem Jahre 2013, wird beschrieben, wie sich zeitbezogene, spatiale Daten in einer relationalen Datenbank speichern lassen.\\
 Hierzu wird für jede zu speichernde Dimension eine Datentabelle angelegt. Diese hängen von dem Domain spezifischen Use-Case ab. In Abbildung \ref{img:star_schema} wird die Bewegung von Geparden gemessen, sowie die Niederschlagsmenge an einem entsprechenden Messturm.
@@ -501,12 +500,12 @@ Baldowski Beschreibt in seiner Arbeit hierzu die folgenden Typen.
 GeoTIFF (.geotiff) ist ebenso wie TIFF ein Format, welches verlustfrei speichert. GeoTIFF speichert zusätzlich zu den Rasterkarten die Geokoordinaten und den Bildausschnitt. Dieser Typ von Speicherung wird insbesondere für Satellitenaufnahmen verwendet.
 
 \subsubsection{Erdas Imagine}\hspace*{\fill} \\
-Bei diesem Format handelt es sich um ein Rasterformat, dass primär von kommerziellen Anwendungen verwendet wird. Die Dateiendung ist .img. Erdas Imagine wurde von ESRI\footnote{\url{http://www.esri.de/}}
+Bei diesem Format handelt es sich um ein Rasterformat, dass primär von kommerziellen Anwendungen verwendet wird. Die Dateiendung ist .img. Erdas Imagine wurde von ESRI\footnote{\url{http://www.esri.de/}} entwickelt.
 
 \subsubsection{Shapefile}\hspace*{\fill} \\
-Shapefiles (.shp) wurden ebenfalls von ESRI entwickelt. Dieses Format ist auf Grund seiner Einfachheit und geringen Overhead das gängigste zur Speicherung von GIS. In Shapefiles können jeweils nur eine Art von daten gespeichert werden (Punkte, Linien, Polygone).
+Shapefiles (.shp) wurden ebenfalls von ESRI entwickelt. Dieses Format ist auf Grund seiner Einfachheit und geringen Overheads das gängigste zur Speicherung von GIS. In Shapefiles können jeweils nur eine Art von daten gespeichert werden (Punkte, Linien, Polygone).
 
-\subsubsection{•}\hspace*{\fill} \\
+\subsubsection{GeoJSON}\hspace*{\fill} \\
 GeoJSON (.json, .geojson) sind Dateien, die Geoinformationen in JSON (JavaScript Object Notation) speichern. GeoJSON ist sehr einfach zu lesen und verfügt über eine geringe Dateigröße. Es wird sowohl in kommerziellen, als auch in freien Anwendungen verwendet.
 
 
@@ -537,7 +536,7 @@ Hierbei wird die Linie, die das Polygon durchläuft in zwei Teilsegmente geteilt
 \end{figure}
 
 \subsubsection{Polygon in Polygon}\hspace*{\fill} \\
-Die Verschneidung von Polygonen mit Polygonen ergibt neue Formen als Summer der Teilmengen.
+Die Verschneidung von Polygonen mit Polygonen ergibt neue Formen als Summe der Teilmengen.
 
 \begin{figure}[H]
   \centering
@@ -547,7 +546,7 @@ Die Verschneidung von Polygonen mit Polygonen ergibt neue Formen als Summer der 
 \end{figure}
 
 \subsection{Raster und Raster}
-Für die Verschneidung von Rasterdaten untereinander ist notwendig, dass die Datensätze verschiedene Voraussetzungen erfüllen.\\
+Für die Verschneidung von Rasterdaten untereinander ist es notwendig, dass die Datensätze verschiedene Voraussetzungen erfüllen.\\
 Die Daten müssen den exakt gleichen Bereich referenzieren. Zudem muss die Qualität übereinstimmen. Dies muss pixelgenau durchgeführt werden.\\
 Die eigentliche Verschneidung erfolgt durch eine pixelweise Differenzenbildung. Das Ergebnis enthält somit Die Summe an Informationen beider Bilder.
 
@@ -643,19 +642,18 @@ Node ist eine Laufzeit Umgebung, die es ermöglicht JavaScript serverseitig ausz
 
 \subsection{Kartendarstellung}
 Die Kartendarstellung im Browser soll nach aktueller Planung LeafletJS\footnote{\url{http://leafletjs.com/}} übernehmen. Leaflet gehört mit ObenLayers zu den bekanntesten, frei verfügbaren JavaScript Bibliotheken zur Kartendarstellung.\\
-Die Recherche hat ergeben, dass in komplexeren Einsatzgebieten OpenLayers bevorzugt wird (siehe \cite{mariuszMaster} \cite{quads} \cite{wms_flow_mapping}).\\
+Die Recherche dieser Arbeit hat ergeben, dass in komplexeren Einsatzgebieten OpenLayers bevorzugt wird (siehe \cite{mariuszMaster} \cite{quads} \cite{wms_flow_mapping}).\\
 OpenLayers ist jedoch mit 770kb Dateigröße ein sehr schwergewichtiges JavaScript Framework, Leaflet hingegen umfasst lediglich 125kb. JQuery, dass im allgemeinen als nicht sonderlich leichtgewichtig gilt ist lediglich 84kb groß.\\
 Diese Größen mögen sich auf den ersten Blick als nicht relevant erweisen. Hierbei wird jedoch vernachlässigt, dass diese Frameworks beim Seitenaufbau geladen werden müssen, was insbesonders bei langsamen Internetverbindungen zur Beeinträchtigung der Benutzbarkeit führt.\\
 Zudem ist Leaflet ein jüngeres und leichter bedienbares Framework. Es wird deshalb zunächst als bevorzugtes betrachtet. Sollte sich herausstellen, dass eine Umsetzung hiermit zu schwierig oder nicht möglich ist, wird eine Umstellung durchgeführt.
 
 
 \section{Zusammenfassung}
-
-
+In dieser Arbeit wurden die Grundlagen der Arbeit von DEIMOS beschrieben. Es wurden zudem Technologieentscheidungen diskutiert. Einige dieser Entscheidungen können sich jedoch in der Zukunft ändern.\\
+DEIMOS wird nach seiner Fertigstellung für die Visualisierung von Simulationsdaten zuständig sein und eine Auswahl von Daten zur Erstellung einer Simulation an das SHUTTLE übergeben können. Für das Grundprojekt soll eine erste Vorabversion erstellt werden.
 
 \bibliographystyle{IEEEtran}
 \bibliography{bibtemplate_samples}
-
 
 
 \end{document}
